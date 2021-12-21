@@ -1,11 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { cardsSlice } from './cardsSlice';
+import { gameOverSlice } from './gameOverSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-  },
-});
+    'cards': cardsSlice.reducer,
+    'gameOver': gameOverSlice.reducer
+  }
+})
+
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
