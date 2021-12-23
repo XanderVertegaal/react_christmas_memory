@@ -1,11 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { cardsSlice } from './cardsSlice';
+import { counterSlice } from './counterSlice';
+import { foundSlice } from './foundSlice';
 import { gameOverSlice } from './gameOverSlice';
+import { selectedSlice } from './selectedSlice';
 
 export const store = configureStore({
   reducer: {
     'cards': cardsSlice.reducer,
-    'gameOver': gameOverSlice.reducer
+    'gameOver': gameOverSlice.reducer,
+    'foundPairs': foundSlice.reducer,
+    'counter': counterSlice.reducer,
+    'selected': selectedSlice.reducer,
   }
 })
 

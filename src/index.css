@@ -1,18 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
 body {
+  background: center/cover url("./img/background.jpg");
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.title__main {
+  text-align: center;
+  color: maroon;
+}
+
+.title__sub {
+  text-align: center;
+  color: goldenrod;
+}
+
+.counters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#btn--restart {
+  background-color: maroon;
+  color: white;
+  padding: .5em 2em;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: .5em;
+}
+
+#btn--restart:hover {
+  background-color: aqua;
+  color: black;
+}
+
+.card__grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(100px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  width: 90%;
+  margin: 0 auto;
+  gap: 1em;
 }
 
 .card {
-  width: 200px;
-  height: 200px;
+  border: 3px solid white;
+  width: 100px;
+  height: 100px;
+  color: white;
+  background-color: rgba(202, 25, 172, 0.959);
+  border-radius: 10px;
 }
+
+.card:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.card-selected {
+  background-color: green;
+}
+
+.card-found {
+  background-color: aqua;
+  cursor: default;
+}
+
+.card-found:hover {
+  cursor: default;
+  -webkit-transform: none;
+          transform: none;
+}
+
+ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.prizes__item {
+  list-style: none;
+  padding: .75em 2em;
+  background-color: maroon;
+  color: white;
+  border-radius: .5em;
+  -webkit-box-shadow: 0px 3px 1px 1px black;
+          box-shadow: 0px 3px 1px 1px black;
+  margin: 1.5em 0;
+}
+
+.prizes__item:hover {
+  background-color: aqua;
+  color: black;
+  cursor: pointer;
+}
+/*# sourceMappingURL=index.css.map */
