@@ -4,6 +4,7 @@ import { counterSlice } from './counterSlice';
 import { foundSlice } from './foundSlice';
 import { gameOverSlice } from './gameOverSlice';
 import { selectedSlice } from './selectedSlice';
+import { wrongSlice } from './wrongSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     'foundPairs': foundSlice.reducer,
     'counter': counterSlice.reducer,
     'selected': selectedSlice.reducer,
+    'wrong': wrongSlice.reducer
   }
 })
 

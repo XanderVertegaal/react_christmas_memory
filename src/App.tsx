@@ -1,4 +1,4 @@
-import { MouseEvent} from 'react';
+import { MouseEvent, useEffect} from 'react';
 import { cardsSlice } from './app/cardsSlice';
 import { selectedSlice } from './app/selectedSlice';
 import { useAppDispatch, useAppSelector } from './app/hooks';
@@ -6,24 +6,26 @@ import { Buttons } from './components/Buttons';
 import { Card } from './components/Card';
 import { MainHeader } from './components/MainHeader';
 import { foundSlice } from './app/foundSlice';
+import { wrongSlice } from './app/wrongSlice';
+import { counterSlice } from './app/counterSlice';
 
 
 
 export type cardType = {
   id: number;
   src: string;
-  corr?: number;
+  corr: number;
 }
 
 const cardList: cardType[] = [
-  {id: 1, src: './img/1.jpg'},
-  {id: 2, src: './img/2.jpg'},
-  {id: 3, src: './img/3.jpg'},
-  {id: 4, src: './img/4.jpg'},
-  {id: 5, src: './img/5.jpg'},
-  {id: 6, src: './img/6.jpg'},
-  {id: 7, src: './img/7.jpg'},
-  {id: 8, src: './img/8.jpg'},
+  {id: 1, src: './img/1.jpg', corr: 0},
+  {id: 2, src: './img/2.jpg', corr: 0},
+  {id: 3, src: './img/3.jpg', corr: 0},
+  {id: 4, src: './img/4.jpg', corr: 0},
+  {id: 5, src: './img/5.jpg', corr: 0},
+  {id: 6, src: './img/6.jpg', corr: 0},
+  {id: 7, src: './img/7.jpg', corr: 0},
+  {id: 8, src: './img/8.jpg', corr: 0},
 ]
 
 const shuffleCards = (cardList: cardType[]) => {
@@ -56,37 +58,49 @@ export const App = () => {
     dispatch(foundSlice.actions.emptyFound())
   }
 
-  const selected = useAppSelector(state => state.selected)
   const cards = useAppSelector(state => state.cards)
+  const selected = useAppSelector(state => state.selected)
+  const matching = cards.filter(card => selected.includes(card.corr))
   const foundCards = useAppSelector(state => state.foundPairs)
 
-  const handleClick = (id: number) => {
-    const selectedCard = cards.find(x => x.id === selected)
+  useEffect(() => {
+    if (foundCards.length === cards.length) {
+      dispatch(counterSlice.actions.increment())
+    }
+  }, [foundCards, cards.length, dispatch])
 
-    if (foundCards.includes(id)) {
+  const handleClick = async (id: number) => {
+    // Clicked card is already found or card is already selected > deselect.
+    if (foundCards.includes(id) || selected.includes(id)) {
       console.log('Already found!')
+      dispatch(selectedSlice.actions.deselect())
       return
     }
 
-    // No card selected yet => new selection
-    if (selectedCard === undefined) {
-      dispatch(selectedSlice.actions.select(id))
-    }
-    // Clicked card is same as selected card => deselect
-    else if (selectedCard.id === id) {
-      dispatch(selectedSlice.actions.deselect())
+    if (selected.length === 1) {
+      // Clicked card matches selected card => pair found
+      if (matching.some(card => card.id === id)) {
+        const selectedCard = matching.find(card => card.id === id)!
+        console.log('Match found! Matching card:', selectedCard)
+        dispatch(selectedSlice.actions.select(id))
+        dispatch(foundSlice.actions.addFound(id))
+        dispatch(foundSlice.actions.addFound(selectedCard.corr))
+        setTimeout(() => {dispatch(selectedSlice.actions.deselect())}, 1000)
 
-    // Clicked card matches selected card => pair found
-    } else if (selectedCard.corr === id) {
-      dispatch(foundSlice.actions.addFound(id))
-      dispatch(foundSlice.actions.addFound(selectedCard.id))
-      console.log('Pair found!')
-      dispatch(selectedSlice.actions.deselect())
-
-    // Clicked card does not match selected card => error message / color change
+      // Clicked card does not match selected card => error message / color change
+      } else {
+        dispatch(selectedSlice.actions.select(id))
+        for (let sel of selected) {
+          dispatch(wrongSlice.actions.addWrong(sel))
+        }
+        dispatch(wrongSlice.actions.addWrong(id))
+        setTimeout(() => {
+          dispatch(selectedSlice.actions.deselect())
+          dispatch(wrongSlice.actions.clearWrong())
+        }, 1000)
+      }
     } else {
-      dispatch(selectedSlice.actions.deselect())
-      console.log('Wrong pair!')
+      dispatch(selectedSlice.actions.select(id))
     }
   }
 

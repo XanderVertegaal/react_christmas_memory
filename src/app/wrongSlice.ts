@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const selectedSlice = createSlice({
-    name: 'selected',
+export const wrongSlice = createSlice({
+    name: 'wrongSlice',
     initialState: [] as number[],
     reducers: {
-        'select': (state, action: PayloadAction<number>) => {
+        'addWrong': (state, action: PayloadAction<number>) => {
             state.push(action.payload)
             return state
         },
-        'deselect': state => []
+        'clearWrong': state => [] 
     }
 })

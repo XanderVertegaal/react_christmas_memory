@@ -15,11 +15,13 @@ code {
 .title__main {
   text-align: center;
   color: maroon;
+  text-shadow: 0px 0px 2px white;
 }
 
 .title__sub {
   text-align: center;
   color: goldenrod;
+  text-shadow: 0px 0px 2px maroon;
 }
 
 .counters {
@@ -56,12 +58,12 @@ code {
 }
 
 .card {
-  border: 3px solid white;
   width: 100px;
   height: 100px;
-  color: white;
-  background-color: rgba(202, 25, 172, 0.959);
+  background: transparent;
   border-radius: 10px;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
 }
 
 .card:hover {
@@ -70,19 +72,65 @@ code {
           transform: scale(1.1);
 }
 
-.card-selected {
-  background-color: green;
+.card-inner {
+  border: 3px solid white;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-transition: -webkit-transform 0.8s;
+  transition: -webkit-transform 0.8s;
+  transition: transform 0.8s;
+  transition: transform 0.8s, -webkit-transform 0.8s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
 }
 
-.card-found {
-  background-color: aqua;
+.card-found .card-inner {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-box-shadow: 0px 0px 30px 8px yellow;
+          box-shadow: 0px 0px 30px 8px yellow;
+}
+
+.card-found .card-inner:hover {
   cursor: default;
 }
 
-.card-found:hover {
-  cursor: default;
-  -webkit-transform: none;
-          transform: none;
+.card-wrong .card-inner {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-box-shadow: 0px 0px 30px 8px red;
+          box-shadow: 0px 0px 30px 8px red;
+}
+
+.card-flipped .card-inner {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-box-shadow: 0px 0px 30px 8px aqua;
+          box-shadow: 0px 0px 30px 8px aqua;
+}
+
+.card-front, .card-back {
+  border-radius: 10px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background: center/cover url("./img/cardbg.jpg");
+  color: white;
+}
+
+.card-back {
+  background-color: gold;
+  color: white;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 ul {
