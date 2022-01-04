@@ -9,6 +9,7 @@ import { counterSlice } from './app/counterSlice';
 import { CardBoard } from './components/CardBoard';
 import { PrizePicture } from './components/PrizePicture';
 import { displaySlice } from './app/displaySlice';
+import { Footer } from './components/Footer';
 
 export type cardType = {
   id: number;
@@ -73,6 +74,7 @@ export const App = () => {
       <MainHeader handleRestart={handleRestart} />
       {display === 'board' ? <CardBoard /> : <PrizePicture no={selectedPrize}/>}
       <Buttons />
+      <Footer />
     </>
   );
 }

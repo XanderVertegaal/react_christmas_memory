@@ -56,7 +56,7 @@ export const Card = ({cardId, handleClick}: CardProps) => {
         <div className={cardClass} onClick={() => handleClick(cardId)}>
             <div className="card-inner">
                 <div className="card-front">
-                    <p className="card__text">{cardId}</p>
+                    <p className="card__text"></p>
                 </div>
                 <div className="card-back" style={cardStyle}></div>
             </div>
