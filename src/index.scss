@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 body {
-  background: cover url('./img/background.jpg');
+  background: center/cover url('./img/background.jpg');
   margin: 0;
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
@@ -28,6 +29,11 @@ code {
 .counters {
   display: flex;
   justify-content: space-around;
+}
+
+.title__counter {
+  color: white;
+  text-shadow: 0px 0px 2px black;
 }
 
 #btn--restart {

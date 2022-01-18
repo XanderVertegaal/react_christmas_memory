@@ -11,9 +11,9 @@ export const MainHeader = ({handleRestart}: {handleRestart: (event: MouseEvent<H
             <h1 className="title__main">Christmas memory game</h1>
             <h2 className="title__sub">A bit of brain training for the Christmas Holidays 2021 -- 2022</h2>
             <section className="counters">
-                <p>Win counter: {counter}</p>
+                <p className="title__counter">Win counter: {counter}</p>
                 <button id="btn--restart" className="button" onClick={handleRestart}>New Game</button>
-                <p>Found pairs: {foundPairs.length / 2} / {cards.length / 2}</p>
+                <p className="title__counter">Found pairs: {foundPairs.length / 2} / {cards.length / 2}</p>
             </section>
         </header>
     )
