@@ -13,10 +13,14 @@ export const CardBoard = () => {
     const matching = cards.filter(card => selected.includes(card.corr))
     const foundCards = useAppSelector(state => state.foundPairs)
 
-    const handleClick = async (id: number) => {
+    const handleClick = (id: number) => {
         // Clicked card is already found or card is already selected > deselect.
         if (foundCards.includes(id) || selected.includes(id)) {
           dispatch(selectedSlice.actions.deselect())
+          return
+        }
+
+        if (selected.length === 2) {
           return
         }
     
@@ -43,7 +47,7 @@ export const CardBoard = () => {
           }
         } else {
           dispatch(selectedSlice.actions.select(id))
-        }
+        }  
       }
 
     const cardItems = cards.map(c => <Card 
